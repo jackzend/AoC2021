@@ -24,6 +24,8 @@ struct Scanner
 
 vector<Scanner> scan_v;
 
+set<point_3d> all_overlaps;
+
 template<typename T>
 struct matrix_hash : std::unary_function<T, size_t>
 {
@@ -171,33 +173,46 @@ void generateRelSets()
 
 void findOverLaps()
 {
-   auto &scanner0 = scan_v[0]; // only doing scanners 0 and 1 for now
-   auto &scanner1 = scan_v[1];
-
-   for ( auto &set1 : scanner0.rel_pos_sets )    // for first rotation set
+   for ( int i = 0; i < scan_v.size(); ++i )
    {
-      bool foundOne = false;
-      for ( auto &set2 : scanner1.rel_pos_sets ) // for second rotations set
+      for ( int j = 0; j < scan_v.size(); ++j )
       {
-         vector<point_3d> v_out( set1.size() + set2.size() );
-
-         auto it = set_intersection( set1.begin(), set1.end(), set2.begin(), set2.end(), v_out.begin() );
-
-         v_out.resize( it - v_out.begin() );
-
-         if ( v_out.size() >= 132 ) // n(n-1)
+         if ( i != j )
          {
-            cout << "overlap found" << v_out.size() << endl;
-            foundOne = true;
-            break;
-         }
+            auto &scanner0 = scan_v[i];
+            auto &scanner1 = scan_v[j];
+            for ( auto &set1 : scanner0.rel_pos_sets ) // for first rotation set
+            {
+               bool foundOne = false;
+               for ( auto &set2 : scanner1.rel_pos_sets ) // for second rotations set
+               {
+                  vector<point_3d> v_out( set1.size() + set2.size() );
 
-      }
-      if ( foundOne )
-      {
-         break;
+                  auto it = set_intersection( set1.begin(), set1.end(), set2.begin(), set2.end(), v_out.begin() );
+
+                  v_out.resize( it - v_out.begin() );
+
+                  if ( v_out.size() >= 132 ) // n(n-1)
+                  {
+                     cout << "overlap found" << v_out.size() << endl;
+                     foundOne = true;
+                     for ( auto &olap : v_out )
+                     {
+                        all_overlaps.insert( olap );
+                     }
+                     break;
+                  }
+
+               }
+               if ( foundOne )
+               {
+                  break;
+               }
+            }
+         }
       }
    }
+   cout << all_overlaps.size();
 }
 
 void partOne()
