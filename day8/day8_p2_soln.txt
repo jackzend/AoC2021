@@ -1,0 +1,48 @@
+
+/** INDEXING the Thing
+ *
+ *
+ *          - 0 -
+ *          1   2
+ *          - 3 -
+ *          4   5
+ *          - 6 -
+ *
+ *
+ */
+
+ step 1: look at ONE and deduce
+
+    map position 2: 'a','b' (semicertain)
+    map position 5: 'a','b' (semicertain)
+
+step 2: look at SEVEN and deduce
+    
+    map position 0: 'd'
+
+step 3: look at FOUR and deduce
+
+    map position 1: 'e','f'
+    map position 3: 'e','f'
+
+step 4: look at EIGHT and deduce
+
+    map position 4: 'c','g'
+    map position 6: 'c','g'
+
+step 5: look at NINE and deduce
+
+    map position 6: 'c'
+    map position 4: 'g'
+
+step 6: look at SIX and deduce
+
+    map position 5: 'b'
+    map position 6: 'a'
+
+step 7 look  at THREE and deduce
+
+    map position 3: 'f'
+    map position 1: 'e'
+
+ALL POSITIONS MAPPED
