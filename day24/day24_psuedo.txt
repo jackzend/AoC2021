@@ -1,0 +1,43 @@
+The MONAD Program does three types of operations on a given INP cycle
+
+1. POP
+    - Input a w
+    - x = z % 26 (this is a top operation)
+    - z /= 26 (this is a pop operation)
+    - x -= num
+    - if (x == w) {x = 0}
+    - y = (25 * 0) + 1 = 1
+    - z = y * z = z (unchanged)
+    - y = w + Offset (this is the potential push)
+    - y = y * x = 0 (x still 0)
+    - z = z + y = z
+
+    Simplified:
+    - Input w
+    - x = z % 26 (top())
+    - z /= 26 (pop())
+    - x -= num
+    - if (x == w) : x = 0
+    - z = z
+
+2. PUSH 
+    - Input a w
+    - x = z % 26 (top())
+    - z /= 1 this is always a push() then
+    - x += num
+    - if (x != w) {x = 1} always true when divisor is 1
+    - y = 26
+    - z = z * y = z * 26 This is "openning up a new spot" (shifting the number for the eventual push())
+    - y = w + offset (we push some number + the offset)
+    - y = y * x = y (x is one)
+    - z = z + y (push())
+
+3. POP and PUSH
+    - Input a w
+    - x = z%26 (top())
+    - z /= 26 (pop())
+    - if (x != w) {x = 1} // push
+    - y = 26
+    - z *= 26
+    - y = w + offset (pusher)
+    - z += y (push)
