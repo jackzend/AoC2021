@@ -20,7 +20,7 @@ using namespace std;
  */
 
 set<char> ONE { '2', '5' };
-set<char> TWO { '0', '2', '' }
+set<char> SEVEN { '0', '2', '5' };
 
 struct sample
 {
